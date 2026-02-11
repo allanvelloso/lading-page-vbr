@@ -1,0 +1,542 @@
+/* ===================================
+   RESPONSIVE DESIGN
+   Mobile First Approach
+   =================================== */
+
+/* ===================================
+   TABLET (768px and up)
+   =================================== */
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .navbar-menu {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: rgba(10, 10, 10, 0.98);
+        flex-direction: column;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .nav-link {
+        padding: 15px 20px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hero */
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 60px 0;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    /* Sections */
+    .section-title {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .trajetoria,
+    .autoridade,
+    .galeria-competicao,
+    .apresentacao,
+    .audiencia-section,
+    .nichos-section,
+    .oportunidades,
+    .diferenciais-parcerias,
+    .planos,
+    .prova-social,
+    .contato-section,
+    .info-section,
+    .redes-sociais {
+        padding: 60px 0;
+    }
+
+    /* Apresentação */
+    .apresentacao-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Contato */
+    .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contato-card {
+        padding: 30px;
+    }
+
+    /* Planos */
+    .plano-destaque {
+        transform: scale(1);
+    }
+
+    .planos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Page Hero */
+    .page-hero {
+        padding: 60px 0;
+    }
+
+    .page-title {
+        font-size: 36px;
+    }
+
+    .page-subtitle {
+        font-size: 16px;
+    }
+
+    /* CTA */
+    .cta-home,
+    .cta-parcerias,
+    .cta-consultoria {
+        padding: 60px 0;
+    }
+
+    .cta-title {
+        font-size: 32px;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* ===================================
+   MOBILE (480px and down)
+   =================================== */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Navigation */
+    .navbar-container {
+        padding: 0 15px;
+        height: 60px;
+    }
+
+    .brand-name {
+        font-size: 18px;
+    }
+
+    /* Hero */
+    .hero {
+        padding: 40px 0;
+    }
+
+    .hero-title {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .btn-large {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    /* Sections */
+    .section-title {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    .trajetoria,
+    .autoridade,
+    .galeria-competicao,
+    .apresentacao,
+    .audiencia-section,
+    .nichos-section,
+    .oportunidades,
+    .diferenciais-parcerias,
+    .planos,
+    .prova-social,
+    .contato-section,
+    .info-section,
+    .redes-sociais {
+        padding: 40px 0;
+    }
+
+    /* Trajetória */
+    .trajetoria-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .trajetoria-item {
+        padding: 25px;
+    }
+
+    .trajetoria-number {
+        font-size: 36px;
+    }
+
+    .trajetoria-item h3 {
+        font-size: 18px;
+    }
+
+    /* Galeria */
+    .galeria-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .galeria-img {
+        height: 300px;
+    }
+
+    /* Stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .stat-card {
+        padding: 30px;
+    }
+
+    .stat-number {
+        font-size: 42px;
+    }
+
+    .stat-label {
+        font-size: 16px;
+    }
+
+    /* Apresentação */
+    .apresentacao-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .apresentacao-text p {
+        font-size: 14px;
+    }
+
+    /* Audiência */
+    .audiencia-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .audiencia-card {
+        padding: 25px;
+    }
+
+    .audiencia-number {
+        font-size: 36px;
+    }
+
+    /* Nichos */
+    .nichos-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .nicho-card {
+        padding: 25px;
+    }
+
+    .nicho-card h3 {
+        font-size: 18px;
+    }
+
+    /* Oportunidades */
+    .oportunidades-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .oportunidade-card {
+        padding: 25px;
+    }
+
+    .oportunidade-card h3 {
+        font-size: 16px;
+    }
+
+    /* Diferenciais */
+    .diferenciais-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .diferencial-item {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .check-icon {
+        font-size: 20px;
+    }
+
+    /* Planos */
+    .planos-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .plano-card {
+        padding: 25px;
+    }
+
+    .plano-header h3 {
+        font-size: 20px;
+    }
+
+    .valor {
+        font-size: 20px;
+    }
+
+    /* Depoimentos */
+    .depoimentos-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .depoimento-card {
+        padding: 20px;
+    }
+
+    /* Contato */
+    .contato-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .contato-card {
+        padding: 25px;
+    }
+
+    .contato-card h2 {
+        font-size: 22px;
+    }
+
+    /* Form */
+    .form-group input,
+    .form-group textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Info */
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .info-card {
+        padding: 25px;
+    }
+
+    /* Redes */
+    .redes-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .rede-link {
+        padding: 30px;
+    }
+
+    /* Page Hero */
+    .page-hero {
+        padding: 40px 0;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    /* CTA */
+    .cta-home,
+    .cta-parcerias,
+    .cta-consultoria {
+        padding: 40px 0;
+    }
+
+    .cta-title {
+        font-size: 24px;
+    }
+
+    .cta-subtitle {
+        font-size: 14px;
+    }
+
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-section h4 {
+        font-size: 16px;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 14px;
+    }
+
+    /* Animations */
+    .fade-in {
+        animation-duration: 0.6s;
+    }
+}
+
+/* ===================================
+   LANDSCAPE MOBILE (568px and up)
+   =================================== */
+
+@media (min-width: 569px) and (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        padding: 60px 0;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .apresentacao-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+
+    .contato-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .planos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .plano-destaque {
+        grid-column: 1 / -1;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+}
+
+/* ===================================
+   LARGE SCREENS (1200px and up)
+   =================================== */
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+
+    .hero {
+        min-height: 100vh;
+    }
+
+    .section-title {
+        margin-bottom: 80px;
+    }
+
+    .trajetoria,
+    .autoridade,
+    .galeria-competicao,
+    .apresentacao,
+    .audiencia-section,
+    .nichos-section,
+    .oportunidades,
+    .diferenciais-parcerias,
+    .planos,
+    .prova-social,
+    .contato-section,
+    .info-section,
+    .redes-sociais {
+        padding: 120px 0;
+    }
+}
+
+/* ===================================
+   PRINT STYLES
+   =================================== */
+
+@media print {
+    .navbar,
+    .footer,
+    .btn,
+    .hamburger {
+        display: none;
+    }
+
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    .section-title,
+    h1,
+    h2,
+    h3 {
+        color: black;
+    }
+}
