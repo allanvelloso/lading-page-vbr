@@ -1,0 +1,30 @@
+# robots.txt para Vinicius Brasil
+# https://viniciusbrasil.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://viniciusbrasil.com/sitemap.xml
+
+# Bloquear arquivos desnecessários
+Disallow: /css/
+Disallow: /js/
+Disallow: /*.md$
+
+# Permitir acesso a imagens
+Allow: /images/
+
+# Crawlers específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Bloquear bots maliciosos (exemplos comuns)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10

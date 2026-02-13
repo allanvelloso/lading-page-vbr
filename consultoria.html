@@ -3,8 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultoria Personalizada - Vinicius Brasil</title>
-    <meta name="description" content="Consultoria personalizada de fisiculturismo. Treino, dieta e estratégia real para transformação.">
+    
+    <!-- Primary Meta Tags -->
+    <title>Consultoria Personalizada de Fisiculturismo - Vinicius Brasil</title>
+    <meta name="title" content="Consultoria Personalizada de Fisiculturismo - Vinicius Brasil">
+    <meta name="description" content="Consultoria personalizada de fisiculturismo. Treino, dieta e estratégia real para transformação. Planos avulso, trimestral e semestral.">
+    <meta name="keywords" content="consultoria fitness, treino personalizado, dieta para musculação, consultoria fisiculturismo, personal trainer online">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viniciusbrasil.com/consultoria.html">
+    <meta property="og:title" content="Consultoria Personalizada de Fisiculturismo - Vinicius Brasil">
+    <meta property="og:description" content="Consultoria personalizada de treino e dieta. Estratégia real para transformação física. Planos a partir de R$ 119,99.">
+    <meta property="og:image" content="https://viniciusbrasil.com/images/og-consultoria.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://viniciusbrasil.com/consultoria.html">
+    <meta property="twitter:title" content="Consultoria Personalizada de Fisiculturismo">
+    <meta property="twitter:description" content="Treino, dieta e estratégia real para transformação física.">
+    <meta property="twitter:image" content="https://viniciusbrasil.com/images/og-consultoria.jpg">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://wa.me">
+    
+    <!-- Google Analytics (Substitua G-XXXXXXXXXX pelo seu ID de medição) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -14,6 +48,7 @@
         <div class="navbar-container">
             <div class="navbar-brand">
                 <a href="index.html">
+                    <img id="navbarLogo" src="images/logo-dourada.png" alt="Logo Vinicius Brasil" class="navbar-logo navbar-logo-rounded">
                     <span class="brand-name">Vinicius <span class="brand-highlight">Brasil</span></span>
                 </a>
             </div>
@@ -34,19 +69,23 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="page-hero">
-        <div class="container">
+    <section class="page-hero page-hero--consultoria">
+        <div class="container page-hero__inner">
+            <p class="page-hero__label">Consultoria</p>
             <h1 class="page-title">Consultoria Personalizada</h1>
             <p class="page-subtitle">Estratégia real. Acompanhamento individualizado. Resultados comprovados.</p>
+            <div class="page-hero__line" aria-hidden="true"></div>
         </div>
     </section>
 
     <!-- Introdução -->
     <section class="consultoria-intro">
         <div class="container">
-            <h2 class="section-title">Não é protocolo genérico</h2>
-            <p class="intro-text">Cada pessoa é única. Seu treino, sua dieta e sua estratégia devem refletir isso. Baseado em 10+ anos de experiência prática e vivência de palco, ofereço acompanhamento individualizado e estratégico para transformação real.</p>
-            <p class="intro-text"><strong>O resultado não falha. A estratégia sim.</strong></p>
+            <div class="consultoria-intro__content">
+                <h2 class="consultoria-intro__title">Não é protocolo genérico</h2>
+                <p class="intro-text">Cada pessoa é única. Seu treino, sua dieta e sua estratégia devem refletir isso. Baseado em 10+ anos de experiência prática e vivência de palco, ofereço acompanhamento individualizado e estratégico para transformação real.</p>
+                <blockquote class="intro-quote">O resultado não falha. A estratégia sim.</blockquote>
+            </div>
         </div>
     </section>
 
@@ -168,7 +207,7 @@
         <div class="container">
             <h2>O resultado não falha. A estratégia sim.</h2>
             <p>Comece sua transformação agora mesmo.</p>
-            <a href="https://wa.me/5522999008197?text=Olá%20Vinicius!%20Gostaria%20de%20saber%20mais%20sobre%20a%20consultoria." target="_blank" class="btn btn-primary btn-large">Falar via WhatsApp</a>
+            <a href="https://wa.me/5522999008197?text=Olá%20Vinicius!%20Gostaria%20de%20saber%20mais%20sobre%20a%20consultoria." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large" aria-label="Abrir conversa no WhatsApp sobre consultoria">Falar via WhatsApp</a>
         </div>
     </section>
 

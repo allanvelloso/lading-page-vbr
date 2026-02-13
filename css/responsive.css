@@ -43,8 +43,8 @@
     .hero {
         grid-template-columns: 1fr;
         gap: 40px;
-        padding: 60px 0;
-        min-height: auto;
+        padding: clamp(30px, 6vh, 50px) 15px clamp(40px, 8vh, 60px);
+        min-height: calc(var(--vh, 100vh) - var(--navbar-height));
     }
 
     .hero-title {
@@ -113,7 +113,19 @@
 
     /* Page Hero */
     .page-hero {
-        padding: 60px 0;
+        min-height: min(38vh, 280px);
+        padding: clamp(40px, 8vh, 60px) 15px;
+    }
+
+    .page-hero--consultoria,
+    .page-hero--parcerias,
+    .page-hero--contato {
+        min-height: min(42vh, 300px);
+    }
+
+    .page-hero__label {
+        font-size: 11px;
+        letter-spacing: 0.15em;
     }
 
     .page-title {
@@ -122,6 +134,21 @@
 
     .page-subtitle {
         font-size: 16px;
+    }
+
+    /* Consultoria / Parcerias Intro */
+    .consultoria-intro__content,
+    .parcerias-intro__content {
+        max-width: 100%;
+    }
+
+    .parcerias-intro__title {
+        font-size: 24px;
+    }
+
+    .intro-quote {
+        font-size: 17px;
+        padding: 16px 18px;
     }
 
     /* CTA */
@@ -149,6 +176,10 @@
    =================================== */
 
 @media (max-width: 480px) {
+    :root {
+        --navbar-height: 60px;
+    }
+
     .container {
         padding: 0 15px;
     }
@@ -165,7 +196,9 @@
 
     /* Hero */
     .hero {
-        padding: 40px 0;
+        padding: clamp(24px, 5vh, 40px) 15px clamp(32px, 6vh, 50px);
+        min-height: calc(100dvh - var(--navbar-height));
+        min-height: calc(var(--vh, 100vh) - var(--navbar-height));
     }
 
     .hero-title {
@@ -398,7 +431,18 @@
 
     /* Page Hero */
     .page-hero {
-        padding: 40px 0;
+        min-height: min(36vh, 260px);
+        padding: clamp(32px, 6vh, 48px) 15px;
+    }
+
+    .page-hero--consultoria,
+    .page-hero--parcerias,
+    .page-hero--contato {
+        min-height: min(38vh, 260px);
+    }
+
+    .page-hero__line {
+        margin-top: 20px;
     }
 
     .page-title {
@@ -407,6 +451,22 @@
 
     .page-subtitle {
         font-size: 14px;
+    }
+
+    /* Consultoria / Parcerias Intro */
+    .consultoria-intro__title,
+    .parcerias-intro__title {
+        font-size: 24px;
+    }
+
+    .intro-text,
+    .parcerias-intro .apresentacao-text p {
+        font-size: 15px;
+    }
+
+    .intro-quote {
+        font-size: 16px;
+        padding: 14px 16px;
     }
 
     /* CTA */
@@ -453,8 +513,9 @@
     .hero {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
-        padding: 60px 0;
-        min-height: auto;
+        padding: clamp(40px, 7vh, 60px) 20px;
+        min-height: calc(100dvh - var(--navbar-height));
+        min-height: calc(var(--vh, 100vh) - var(--navbar-height));
     }
 
     .hero-title {

@@ -15,6 +15,9 @@
     --text-dark-gray: #999999;
     --border-color: #333333;
     --transition: all 0.3s ease;
+    /* Viewport e layout */
+    --navbar-height: 70px;
+    --vh: 100vh; /* fallback; JS ou 100dvh pode sobrescrever em mobile */
 }
 
 * {
@@ -25,6 +28,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -33,11 +37,105 @@ body {
     color: var(--text-light);
     line-height: 1.6;
     overflow-x: hidden;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===================================
+   ACCESSIBILITY - Skip Link
+   =================================== */
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background-color: var(--gold);
+    color: var(--primary-dark);
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 10000;
+    border-radius: 0 0 5px 0;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===================================
+   SCROLL TO TOP BUTTON
+   =================================== */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--gold);
+    color: var(--primary-dark);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.scroll-to-top.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+}
+
+.scroll-to-top:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 20px;
+    }
 }
 
 /* ===================================
    CONTAINER & LAYOUT
    =================================== */
+
+main {
+    flex: 1;
+}
 
 .container {
     max-width: 1200px;
@@ -72,6 +170,18 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+.navbar-logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+}
+
+.navbar-logo-rounded {
+    border-radius: 999px;
 }
 
 .brand-name {
@@ -137,8 +247,9 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
-    padding: 100px 0;
-    min-height: 100vh;
+    padding: clamp(40px, 8vh, 80px) 20px clamp(50px, 10vh, 100px);
+    min-height: calc(100dvh - var(--navbar-height));
+    min-height: calc(var(--vh, 100vh) - var(--navbar-height));
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(10, 10, 10, 1) 100%);
 }
 
@@ -410,24 +521,126 @@ body {
    =================================== */
 
 .page-hero {
-    padding: 80px 0;
+    min-height: min(42vh, 320px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(50px, 10vh, 80px) 20px;
     text-align: center;
     background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(10, 10, 10, 1) 100%);
     border-bottom: 1px solid var(--border-color);
 }
 
+.page-hero--consultoria {
+    min-height: min(48vh, 380px);
+    background: linear-gradient(160deg, rgba(212, 175, 55, 0.12) 0%, rgba(10, 10, 10, 0.98) 50%, rgba(10, 10, 10, 1) 100%);
+}
+
+.page-hero--parcerias {
+    min-height: min(48vh, 380px);
+    background: linear-gradient(160deg, rgba(212, 175, 55, 0.1) 0%, rgba(26, 26, 26, 0.97) 45%, rgba(10, 10, 10, 1) 100%);
+}
+
+.page-hero--contato {
+    min-height: min(48vh, 380px);
+    background: linear-gradient(160deg, rgba(212, 175, 55, 0.08) 0%, rgba(10, 10, 10, 0.99) 55%, rgba(10, 10, 10, 1) 100%);
+}
+
+.page-hero__inner {
+    width: 100%;
+}
+
+.page-hero__label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.page-hero__line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin: 28px auto 0;
+    border-radius: 2px;
+}
+
 .page-title {
     font-size: 52px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     letter-spacing: -1px;
 }
 
 .page-subtitle {
     font-size: 18px;
     color: var(--text-gray);
-    max-width: 600px;
+    max-width: 560px;
     margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* ===================================
+   CONSULTORIA INTRO SECTION
+   =================================== */
+
+.consultoria-intro {
+    padding: clamp(60px, 12vh, 100px) 0;
+    background-color: var(--primary-dark);
+}
+
+.consultoria-intro__content {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.consultoria-intro__title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+}
+
+.intro-text {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--text-gray);
+    margin-bottom: 24px;
+}
+
+.intro-quote {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 32px 0 0;
+    padding: 20px 24px;
+    border-left: 4px solid var(--gold);
+    background: rgba(212, 175, 55, 0.06);
+    border-radius: 0 8px 8px 0;
+    font-style: normal;
+}
+
+/* Parcerias intro (reusa estilos da consultoria) */
+.parcerias-intro__title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--gold);
+    display: inline-block;
+}
+
+.parcerias-intro .apresentacao-text p {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--text-gray);
+    margin-bottom: 24px;
 }
 
 /* ===================================
@@ -917,6 +1130,28 @@ body {
     padding: 15px;
     border-radius: 5px;
     text-align: center;
+}
+
+.form-error {
+    background-color: rgba(255, 107, 107, 0.1);
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-error a {
+    color: #ff6b6b;
+    text-decoration: underline;
+}
+
+/* Loading state for buttons */
+.btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed !important;
+    pointer-events: none;
 }
 
 /* ===================================

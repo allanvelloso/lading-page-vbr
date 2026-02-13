@@ -1,0 +1,30 @@
+COMO FAZER A LOGO APARECER NO SITE
+====================================
+
+1. Coloque o arquivo da sua logo DENTRO desta pasta (images/).
+
+2. O arquivo precisa se chamar exatamente:
+   logo-dourada.png
+   OU
+   logo-dourada.jpg
+   OU
+   logo-dourada.jpeg
+   OU
+   logo-dourada.webp
+
+3. Se a sua logo tiver outro nome (ex: "minha-logo.png"):
+   - Renomeie para: logo-dourada.png (ou .jpg)
+   - Ou coloque uma cópia com o nome logo-dourada.png nesta pasta.
+
+4. Esta pasta deve ficar no mesmo nível que index.html, assim:
+   lading-page-vbr/
+   ├── index.html
+   ├── consultoria.html
+   ├── ...
+   └── images/
+       ├── logo-dourada.png   <-- sua logo aqui
+       └── (outras imagens)
+
+5. Depois de colocar a logo, atualize a página no navegador (F5).
+   Se ainda não aparecer, confira se o nome está exatamente:
+   logo-dourada.png (tudo minúsculo, com hífen).

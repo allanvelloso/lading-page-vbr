@@ -3,8 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Vinicius Brasil</title>
-    <meta name="description" content="Entre em contato com Vinicius Brasil para consultoria ou parcerias. Atendimento de segunda a sexta.">
+    
+    <!-- Primary Meta Tags -->
+    <title>Contato - Vinicius Brasil | Consultoria e Parcerias</title>
+    <meta name="title" content="Contato - Vinicius Brasil | Consultoria e Parcerias">
+    <meta name="description" content="Entre em contato com Vinicius Brasil para consultoria personalizada ou parcerias estratégicas. Atendimento de segunda a sexta.">
+    <meta name="keywords" content="contato Vinicius Brasil, consultoria fitness, parcerias fitness, WhatsApp personal trainer">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://viniciusbrasil.com/contato.html">
+    <meta property="og:title" content="Contato - Vinicius Brasil">
+    <meta property="og:description" content="Entre em contato para consultoria ou parcerias. WhatsApp: (22) 99900-8197">
+    <meta property="og:image" content="https://viniciusbrasil.com/images/og-contato.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://viniciusbrasil.com/contato.html">
+    <meta property="twitter:title" content="Contato - Vinicius Brasil">
+    <meta property="twitter:description" content="WhatsApp: (22) 99900-8197 | Email: viniicius.br2@gmail.com">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://wa.me">
+    
+    <!-- Google Analytics (Substitua G-XXXXXXXXXX pelo seu ID de medição) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
@@ -14,6 +47,7 @@
         <div class="navbar-container">
             <div class="navbar-brand">
                 <a href="index.html">
+                    <img id="navbarLogo" src="images/logo-dourada.png" alt="Logo Vinicius Brasil" class="navbar-logo navbar-logo-rounded">
                     <span class="brand-name">Vinicius <span class="brand-highlight">Brasil</span></span>
                 </a>
             </div>
@@ -34,10 +68,12 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="page-hero">
-        <div class="container">
+    <section class="page-hero page-hero--contato">
+        <div class="container page-hero__inner">
+            <p class="page-hero__label">Contato</p>
             <h1 class="page-title">Vamos Construir Algo Grande?</h1>
             <p class="page-subtitle">Atendimento de segunda a sexta em horário comercial</p>
+            <div class="page-hero__line" aria-hidden="true"></div>
         </div>
     </section>
 
@@ -49,7 +85,7 @@
                 <div class="contato-card fade-in">
                     <h2>Para Alunos</h2>
                     <p>Interessado em consultoria personalizada? Fale comigo direto pelo WhatsApp.</p>
-                    <a href="https://wa.me/5522999008197?text=Olá%20Vinicius!%20Gostaria%20de%20saber%20mais%20sobre%20a%20consultoria." target="_blank" class="btn btn-primary btn-block">
+                    <a href="https://wa.me/5522999008197?text=Olá%20Vinicius!%20Gostaria%20de%20saber%20mais%20sobre%20a%20consultoria." target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block" aria-label="Abrir conversa no WhatsApp">
                         Falar via WhatsApp
                     </a>
                     <p class="contato-info">(22) 99900-8197</p>
@@ -96,7 +132,7 @@
                 </div>
                 <div class="info-card fade-in">
                     <h3>WhatsApp</h3>
-                    <p><a href="https://wa.me/5522999008197" target="_blank">(22) 99900-8197</a></p>
+                    <p><a href="https://wa.me/5522999008197" target="_blank" rel="noopener noreferrer">(22) 99900-8197</a></p>
                 </div>
                 <div class="info-card fade-in">
                     <h3>Horário de Atendimento</h3>
@@ -111,15 +147,15 @@
         <div class="container">
             <h2 class="section-title">Acompanhe nas Redes Sociais</h2>
             <div class="redes-grid">
-                <a href="https://instagram.com/vinibrasil_o" target="_blank" class="rede-link fade-in">
+                <a href="https://instagram.com/vinibrasil_o" target="_blank" rel="noopener noreferrer" class="rede-link fade-in" aria-label="Seguir no Instagram">
                     <span>Instagram</span>
                     <p>@vinibrasil_o</p>
                 </a>
-                <a href="https://facebook.com" target="_blank" class="rede-link fade-in">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="rede-link fade-in" aria-label="Seguir no Facebook">
                     <span>Facebook</span>
                     <p>Vinicius Brasil</p>
                 </a>
-                <a href="https://tiktok.com/@vinibrasil_o" target="_blank" class="rede-link fade-in">
+                <a href="https://tiktok.com/@vinibrasil_o" target="_blank" rel="noopener noreferrer" class="rede-link fade-in" aria-label="Seguir no TikTok">
                     <span>TikTok</span>
                     <p>@vinibrasil_o</p>
                 </a>
@@ -156,6 +192,14 @@
         </div>
     </footer>
 
+    <!-- EmailJS SDK (Descomente após configurar EmailJS) -->
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init("SUA_PUBLIC_KEY_AQUI");
+       })();
+    </script> -->
+    
     <script src="js/script.js"></script>
 </body>
 </html>

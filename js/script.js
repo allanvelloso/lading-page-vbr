@@ -4,6 +4,24 @@
    =================================== */
 
 // ===================================
+// LOGO FALLBACK (tenta .png, .jpg, .jpeg, .webp)
+// ===================================
+(function() {
+    const logoPaths = ['images/logo-dourada.png', 'images/logo-dourada.jpg', 'images/logo-dourada.jpeg', 'images/logo-dourada.webp', '../images/logo-dourada.png', '../images/logo-dourada.jpg'];
+    document.querySelectorAll('.navbar-logo').forEach(function(img) {
+        let index = 0;
+        img.onerror = function() {
+            index++;
+            if (index < logoPaths.length) {
+                this.src = logoPaths[index];
+            } else {
+                this.style.display = 'none';
+            }
+        };
+    });
+})();
+
+// ===================================
 // MOBILE MENU TOGGLE
 // ===================================
 
@@ -12,8 +30,11 @@ const navbarMenu = document.getElementById('navbarMenu');
 
 if (hamburger) {
     hamburger.addEventListener('click', () => {
-        navbarMenu.classList.toggle('active');
+        const isActive = navbarMenu.classList.toggle('active');
         hamburger.classList.toggle('active');
+        // Update ARIA attributes for accessibility
+        hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        hamburger.setAttribute('aria-label', isActive ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
     });
 }
 
@@ -23,6 +44,10 @@ navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navbarMenu.classList.remove('active');
         hamburger.classList.remove('active');
+        if (hamburger) {
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Abrir menu de navegação');
+        }
     });
 });
 
@@ -89,13 +114,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===================================
-// CONTACT FORM VALIDATION
+// CONTACT FORM VALIDATION & SUBMISSION
 // ===================================
 
 const contactForm = document.getElementById('contactForm');
 
+// EmailJS Configuration
+// IMPORTANTE: Substitua estes valores pelos seus IDs do EmailJS
+// Veja o arquivo IMPLEMENTACAO_EMAILJS.md para instruções detalhadas
+const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'SUA_PUBLIC_KEY_AQUI', // Substitua pela sua Public Key
+    SERVICE_ID: 'SEU_SERVICE_ID_AQUI',  // Substitua pelo seu Service ID
+    TEMPLATE_ID: 'SEU_TEMPLATE_ID_AQUI' // Substitua pelo seu Template ID
+};
+
+// Check if EmailJS is available
+const isEmailJSConfigured = () => {
+    return EMAILJS_CONFIG.PUBLIC_KEY !== 'SUA_PUBLIC_KEY_AQUI' && 
+           typeof emailjs !== 'undefined';
+};
+
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         // Get form values
@@ -105,60 +145,159 @@ if (contactForm) {
         const message = document.getElementById('message').value.trim();
         
         // Reset error messages
-        document.getElementById('nameError').textContent = '';
-        document.getElementById('emailError').textContent = '';
-        document.getElementById('messageError').textContent = '';
-        document.getElementById('nameError').classList.remove('show');
-        document.getElementById('emailError').classList.remove('show');
-        document.getElementById('messageError').classList.remove('show');
+        const nameError = document.getElementById('nameError');
+        const emailError = document.getElementById('emailError');
+        const messageError = document.getElementById('messageError');
+        
+        nameError.textContent = '';
+        emailError.textContent = '';
+        messageError.textContent = '';
+        nameError.classList.remove('show');
+        emailError.classList.remove('show');
+        messageError.classList.remove('show');
+        
+        // Remove previous error messages
+        const existingErrors = contactForm.querySelectorAll('.form-error');
+        existingErrors.forEach(error => error.remove());
         
         let isValid = true;
         
         // Validate name
         if (name.length < 3) {
-            document.getElementById('nameError').textContent = 'Nome deve ter pelo menos 3 caracteres';
-            document.getElementById('nameError').classList.add('show');
+            nameError.textContent = 'Nome deve ter pelo menos 3 caracteres';
+            nameError.classList.add('show');
             isValid = false;
         }
         
         // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            document.getElementById('emailError').textContent = 'Email inválido';
-            document.getElementById('emailError').classList.add('show');
+            emailError.textContent = 'Email inválido';
+            emailError.classList.add('show');
             isValid = false;
         }
         
         // Validate message
         if (message.length < 10) {
-            document.getElementById('messageError').textContent = 'Mensagem deve ter pelo menos 10 caracteres';
-            document.getElementById('messageError').classList.add('show');
+            messageError.textContent = 'Mensagem deve ter pelo menos 10 caracteres';
+            messageError.classList.add('show');
             isValid = false;
         }
         
         if (isValid) {
-            // Simulate form submission
-            const formData = {
-                name: name,
-                email: email,
-                company: company,
-                message: message,
-                timestamp: new Date().toISOString()
-            };
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            const formSuccess = document.getElementById('formSuccess');
             
-            // Log form data (in production, this would be sent to a server)
-            console.log('Form submitted:', formData);
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Enviando...';
+            submitButton.style.opacity = '0.7';
+            submitButton.style.cursor = 'not-allowed';
             
-            // Show success message
-            contactForm.style.display = 'none';
-            document.getElementById('formSuccess').style.display = 'block';
-            
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                contactForm.reset();
-                contactForm.style.display = 'block';
-                document.getElementById('formSuccess').style.display = 'none';
-            }, 3000);
+            try {
+                // Try to send via EmailJS if configured
+                if (isEmailJSConfigured()) {
+                    await emailjs.send(
+                        EMAILJS_CONFIG.SERVICE_ID,
+                        EMAILJS_CONFIG.TEMPLATE_ID,
+                        {
+                            name: name,
+                            email: email,
+                            company: company || 'Não informado',
+                            message: message,
+                            timestamp: new Date().toLocaleString('pt-BR')
+                        }
+                    );
+                    
+                    // Track successful submission
+                    trackEvent('form_submission_success', {
+                        form_name: 'contact_form',
+                        method: 'emailjs',
+                        page: window.location.pathname
+                    });
+                } else {
+                    // Fallback: Log to console and show success (for development)
+                    console.log('Form submitted (EmailJS not configured):', {
+                        name: name,
+                        email: email,
+                        company: company,
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Show warning that EmailJS needs to be configured
+                    console.warn('⚠️ EmailJS não configurado. Configure seguindo o guia IMPLEMENTACAO_EMAILJS.md');
+                    
+                    trackEvent('form_submission_success', {
+                        form_name: 'contact_form',
+                        method: 'console_log',
+                        page: window.location.pathname
+                    });
+                }
+                
+                // Show success message
+                contactForm.style.display = 'none';
+                formSuccess.style.display = 'block';
+                
+                // Track event
+                trackEvent('form_submission', {
+                    form_name: 'contact_form',
+                    page: window.location.pathname
+                });
+                
+                // Reset form after 5 seconds
+                setTimeout(() => {
+                    contactForm.reset();
+                    contactForm.style.display = 'block';
+                    formSuccess.style.display = 'none';
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                    submitButton.style.opacity = '1';
+                    submitButton.style.cursor = 'pointer';
+                }, 5000);
+                
+            } catch (error) {
+                console.error('Erro ao enviar formulário:', error);
+                
+                // Show error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'form-error';
+                errorDiv.style.cssText = `
+                    background-color: rgba(255, 107, 107, 0.1);
+                    border: 1px solid #ff6b6b;
+                    color: #ff6b6b;
+                    padding: 15px;
+                    border-radius: 5px;
+                    text-align: center;
+                    margin-top: 20px;
+                    font-size: 14px;
+                `;
+                errorDiv.innerHTML = `
+                    <strong>Erro ao enviar mensagem.</strong><br>
+                    Por favor, tente novamente ou entre em contato diretamente pelo WhatsApp: 
+                    <a href="https://wa.me/5522999008197" target="_blank" rel="noopener noreferrer" style="color: #ff6b6b; text-decoration: underline;">(22) 99900-8197</a>
+                `;
+                contactForm.appendChild(errorDiv);
+                
+                // Reset button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                submitButton.style.opacity = '1';
+                submitButton.style.cursor = 'pointer';
+                
+                // Remove error message after 8 seconds
+                setTimeout(() => {
+                    errorDiv.remove();
+                }, 8000);
+                
+                // Track error
+                trackEvent('form_submission_error', {
+                    form_name: 'contact_form',
+                    error: error.message,
+                    page: window.location.pathname
+                });
+            }
         }
     });
 }
@@ -236,48 +375,36 @@ buttons.forEach(button => {
 const scrollToTopBtn = document.createElement('button');
 scrollToTopBtn.innerHTML = '↑';
 scrollToTopBtn.className = 'scroll-to-top';
-scrollToTopBtn.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--gold);
-    color: var(--primary-dark);
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    display: none;
-    z-index: 999;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-`;
-
+scrollToTopBtn.setAttribute('aria-label', 'Voltar ao topo da página');
 document.body.appendChild(scrollToTopBtn);
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'block';
-    } else {
-        scrollToTopBtn.style.display = 'none';
+// Throttle scroll event for better performance
+let ticking = false;
+function handleScroll() {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+            ticking = false;
+        });
+        ticking = true;
     }
-});
+}
+
+window.addEventListener('scroll', handleScroll, { passive: true });
 
 scrollToTopBtn.addEventListener('click', () => {
     window.scrollTo({
         top: 0,
         behavior: 'smooth'
     });
-});
-
-scrollToTopBtn.addEventListener('mouseenter', function() {
-    this.style.transform = 'scale(1.1)';
-});
-
-scrollToTopBtn.addEventListener('mouseleave', function() {
-    this.style.transform = 'scale(1)';
+    // Track event
+    trackEvent('scroll_to_top', {
+        page: window.location.pathname
+    });
 });
 
 // ===================================
@@ -316,9 +443,13 @@ window.addEventListener('load', () => {
 
 document.addEventListener('keydown', (e) => {
     // Close mobile menu on Escape
-    if (e.key === 'Escape' && navbarMenu.classList.contains('active')) {
+    if (e.key === 'Escape' && navbarMenu && navbarMenu.classList.contains('active')) {
         navbarMenu.classList.remove('active');
-        hamburger.classList.remove('active');
+        if (hamburger) {
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            hamburger.setAttribute('aria-label', 'Abrir menu de navegação');
+        }
     }
 });
 
